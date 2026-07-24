@@ -8,12 +8,11 @@
     "start": "next start"
   },
   "dependencies": {
-    "next": "latest",
-    "react": "latest",
-    "react-dom": "latest",
-    "@mui/material": "latest",
-    "@emotion/react": "latest",
-    "@emotion/styled": "latest",
-    "lucide-react": "latest"
+    "next": "15.1.0",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
+    "@mui/material": "6.1.0",
+    "@emotion/react": "11.13.0",
+    "@emotion/styled": "11.13.0"
   }
 }
