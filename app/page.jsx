@@ -1,3 +1,16 @@
+'use client';
+
+import React, { useState, useEffect } from 'react';
+import { 
+  Button, Card, CardContent, Typography, TextField, Container, Grid, 
+  IconButton, Paper, Box, Divider, MenuItem, Select, FormControl, 
+  InputLabel, Snackbar, Tooltip
+} from '@mui/material';
+
+// PASTE THE REST OF YOUR ULTRA V1.0.4 CODE HERE
+// (Starting from: const App = () => { ... )
+
+export default App; // Ensure this is at the bottom
 const { useState, useEffect } = React;
 const { 
   Button, 
