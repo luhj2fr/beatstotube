@@ -7,32 +7,7 @@ import {
   InputLabel, Snackbar, Tooltip
 } from '@mui/material';
 
-// PASTE THE REST OF YOUR ULTRA V1.0.4 CODE HERE
-// (Starting from: const App = () => { ... )
-
-export default App; // Ensure this is at the bottom
-const { useState, useEffect } = React;
-const { 
-  Button, 
-  Card, 
-  CardContent, 
-  Typography, 
-  TextField, 
-  Container, 
-  Grid, 
-  IconButton, 
-  Paper,
-  Box,
-  Divider,
-  MenuItem,
-  Select,
-  FormControl,
-  InputLabel,
-  Snackbar,
-  Tooltip
-} = MaterialUI;
-
-const App = () => {
+export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [activeTab, setActiveTab] = useState('upload');
   const [files, setFiles] = useState({ media: null, audio: null });
@@ -55,14 +30,9 @@ const App = () => {
     picture: 'https://cdn-icons-png.flaticon.com/512/3135/3135715.png' 
   });
 
-// New way for Vercel (Next.js)
-const CLIENT_ID = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID;
-const REDIRECT_URI = typeof window !== 'undefined' ? window.location.origin : 'http://localhost:3000';
+  const CLIENT_ID = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID;
 
   const handleGoogleLogin = () => {
-    // In a real app, you'd redirect to Google OAuth here:
-    // const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=token&scope=https://www.googleapis.com/auth/youtube.upload`;
-    // window.location.href = authUrl;
     setIsLoggedIn(true);
   };
 
@@ -97,16 +67,14 @@ const REDIRECT_URI = typeof window !== 'undefined' ? window.location.origin : 'h
   if (!isLoggedIn) {
     return (
       <div className="min-h-screen bg-[#050505] flex items-center justify-center p-4 selection:bg-red-500/30 overflow-hidden relative">
-        {/* Animated Background Orbs */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <div className="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] bg-red-600/10 blur-[150px] rounded-full animate-pulse"></div>
           <div className="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] bg-blue-600/10 blur-[150px] rounded-full animate-pulse" style={{ animationDelay: '2s' }}></div>
         </div>
 
         <Card className="max-w-md w-full bg-[#0f0f0f] text-white border border-white/5 shadow-[0_0_100px_rgba(220,38,38,0.1)] relative z-10 rounded-[40px] overflow-hidden">
-          <div className="h-1.5 bg-gradient-to-r from-red-600 via-white to-red-600 animate-gradient-x"></div>
+          <div className="h-1.5 bg-gradient-to-r from-red-600 via-white to-red-600"></div>
           <CardContent className="flex flex-col items-center py-16 px-10">
-            {/* Animated Logo Container */}
             <div className="relative mb-10 group">
               <div className="absolute -inset-4 bg-red-600/20 rounded-full blur-xl group-hover:bg-red-600/40 transition duration-1000"></div>
               <div className="w-48 h-24 bg-white rounded-[2rem] flex items-center justify-center shadow-2xl relative transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3 px-6">
@@ -128,39 +96,23 @@ const REDIRECT_URI = typeof window !== 'undefined' ? window.location.origin : 'h
             </button>
 
             <div className="flex items-center gap-3 opacity-30 mt-4">
-              <span className="h-px w-8 bg-white"></span>
               <p className="text-[10px] font-bold tracking-widest uppercase text-white">By prodbymdotty</p>
-              <span className="h-px w-8 bg-white"></span>
             </div>
           </CardContent>
         </Card>
-
-        <style>{`
-          @keyframes gradient-x {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-          }
-          .animate-gradient-x {
-            background-size: 200% 200%;
-            animation: gradient-x 3s linear infinite;
-          }
-        `}</style>
       </div>
     );
   }
 
   return (
     <div className="min-h-screen bg-[#050505] text-slate-100 pb-32">
-      {/* Background Glow */}
       <div className="fixed inset-0 pointer-events-none">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-screen bg-red-600/5 blur-[120px]"></div>
       </div>
 
-      {/* Modern Header */}
-      <nav className="sticky top-0 z-50 bg-[#050505]/60 backdrop-blur-2xl border-b border-white-[0.05] py-5 px-10 flex justify-between items-center transition-all">
+      <nav className="sticky top-0 z-50 bg-[#050505]/60 backdrop-blur-2xl border-b border-white/5 py-5 px-10 flex justify-between items-center transition-all">
         <div className="flex items-center gap-3 cursor-pointer group" onClick={() => setActiveTab('upload')}>
-          <div className="w-11 h-11 bg-white/5 rounded-2xl flex items-center justify-center border border-white/10 shadow-lg transition-transform group-hover:scale-105 group-hover:rotate-6">
+          <div className="w-11 h-11 bg-white/5 rounded-2xl flex items-center justify-center border border-white/10 shadow-lg">
             <img src="https://static.vecteezy.com/system/resources/previews/018/930/572/original/youtube-logo-youtube-icon-transparent-free-png.png" className="w-6 h-auto object-contain" alt="YouTube Logo" />
           </div>
           <span className="font-black text-2xl tracking-tighter uppercase relative">
@@ -189,7 +141,7 @@ const REDIRECT_URI = typeof window !== 'undefined' ? window.location.origin : 'h
              <span className="text-sm font-bold text-white">{userProfile.name}</span>
            </div>
            <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center group cursor-pointer hover:bg-white/10 transition-colors overflow-hidden">
-              <img src={userProfile.picture} className="w-full h-full object-cover transition-transform group-hover:scale-110" alt="User" />
+              <img src={userProfile.picture} className="w-full h-full object-cover" alt="User" />
            </div>
         </div>
       </nav>
@@ -197,7 +149,6 @@ const REDIRECT_URI = typeof window !== 'undefined' ? window.location.origin : 'h
       <Container maxWidth="lg" className="pt-16 relative">
         {activeTab === 'upload' ? (
           <Grid container spacing={6}>
-            {/* Left Col: Uploads */}
             <Grid item xs={12} md={7}>
                <div className="space-y-10">
                   <header>
@@ -209,11 +160,10 @@ const REDIRECT_URI = typeof window !== 'undefined' ? window.location.origin : 'h
                     <label className="group relative block aspect-square bg-white/[0.02] border-2 border-dashed border-white/5 rounded-[40px] hover:border-red-600 transition-all cursor-pointer overflow-hidden p-8">
                        <input type="file" hidden accept="image/*" onChange={(e) => handleFileUpload('media', e)} />
                        <div className="h-full flex flex-col items-center justify-center text-center">
-                          <div className="w-16 h-16 rounded-[24px] bg-white/5 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                            <i className="fa-solid fa-image text-3xl text-slate-500 group-hover:text-red-600 transition-colors"></i>
+                          <div className="w-16 h-16 rounded-[24px] bg-white/5 flex items-center justify-center mb-6 font-bold">
+                            <i className="fa-solid fa-image text-3xl text-slate-500"></i>
                           </div>
                           <Typography className="font-bold text-lg">Image Background</Typography>
-                          <Typography className="text-xs text-slate-500 mt-2">Static visual art</Typography>
                           {files.media && files.media.type.startsWith('image') && (
                             <div className="absolute inset-0 bg-red-600/10 flex items-center justify-center backdrop-blur-sm border-2 border-red-600 rounded-[40px]">
                                <Typography className="font-black uppercase tracking-tighter text-red-500">Image Attached</Typography>
@@ -225,11 +175,10 @@ const REDIRECT_URI = typeof window !== 'undefined' ? window.location.origin : 'h
                     <label className="group relative block aspect-square bg-white/[0.02] border-2 border-dashed border-white/5 rounded-[40px] hover:border-red-600 transition-all cursor-pointer overflow-hidden p-8">
                        <input type="file" hidden accept="video/mp4" onChange={(e) => handleFileUpload('media', e)} />
                        <div className="h-full flex flex-col items-center justify-center text-center">
-                          <div className="w-16 h-16 rounded-[24px] bg-white/5 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                            <i className="fa-solid fa-film text-3xl text-slate-500 group-hover:text-red-600 transition-colors"></i>
+                          <div className="w-16 h-16 rounded-[24px] bg-white/5 flex items-center justify-center mb-6">
+                            <i className="fa-solid fa-film text-3xl text-slate-500"></i>
                           </div>
                           <Typography className="font-bold text-lg">Video Background</Typography>
-                          <Typography className="text-xs text-slate-500 mt-2">Looping MP4 visuals</Typography>
                           {files.media && files.media.type.startsWith('video') && (
                             <div className="absolute inset-0 bg-red-600/10 flex items-center justify-center backdrop-blur-sm border-2 border-red-600 rounded-[40px]">
                                <Typography className="font-black uppercase tracking-tighter text-red-500">Video Attached</Typography>
@@ -242,14 +191,14 @@ const REDIRECT_URI = typeof window !== 'undefined' ? window.location.origin : 'h
                   <label className="group relative block bg-white/[0.02] border-2 border-dashed border-white/5 rounded-[40px] hover:border-red-600 transition-all cursor-pointer overflow-hidden p-10 mt-10">
                     <input type="file" hidden accept="audio/mp3,audio/wav" onChange={(e) => handleFileUpload('audio', e)} />
                     <div className="flex items-center gap-8">
-                       <div className="w-20 h-20 bg-gradient-to-br from-red-600 to-red-800 rounded-3xl flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform shadow-red-600/20">
+                       <div className="w-20 h-20 bg-red-600 rounded-3xl flex items-center justify-center shadow-xl">
                           <i className="fa-solid fa-microphone-lines text-white text-3xl"></i>
                        </div>
                        <div className="flex-1">
                           <Typography className="font-black text-2xl tracking-tight mb-1">
                              {files.audio ? files.audio.name : "Choose Beat File"}
                           </Typography>
-                          <Typography className="text-slate-500 font-bold uppercase text-[10px] tracking-widest leading-none">
+                          <Typography className="text-slate-500 font-bold uppercase text-[10px] tracking-widest">
                              WAV or MP3 (Max 500MB)
                           </Typography>
                        </div>
@@ -259,13 +208,8 @@ const REDIRECT_URI = typeof window !== 'undefined' ? window.location.origin : 'h
                </div>
             </Grid>
 
-            {/* Right Col: Meta */}
             <Grid item xs={12} md={5}>
                <div className="bg-[#0f0f0f] border border-white/5 rounded-[48px] p-10 sticky top-32 shadow-2xl overflow-hidden group">
-                  <div className="absolute top-0 right-0 p-10 opacity-5 group-hover:opacity-10 transition-opacity">
-                    <i className="fa-brands fa-youtube text-[120px]"></i>
-                  </div>
-
                   <div className="relative">
                     <div className="flex items-center justify-between mb-10">
                        <Typography className="font-black text-xl tracking-tighter">YOUTUBE STUDIO</Typography>
@@ -298,7 +242,7 @@ const REDIRECT_URI = typeof window !== 'undefined' ? window.location.origin : 'h
                           <label className="text-[10px] font-black uppercase text-slate-500 tracking-widest ml-1 mb-2 block">Description</label>
                           <textarea 
                             rows={6}
-                            className="w-full bg-white/5 border border-white/10 rounded-2xl p-5 text-sm font-medium text-white focus:outline-none focus:border-red-600 transition-colors leading-relaxed placeholder:text-slate-700 resize-none"
+                            className="w-full bg-white/5 border border-white/10 rounded-2xl p-5 text-sm font-medium text-white focus:outline-none focus:border-red-600 leading-relaxed placeholder:text-slate-700 resize-none"
                             placeholder="Add credits, links, and contact info..."
                             value={metadata.description}
                             onChange={(e) => setMetadata({...metadata, description: e.target.value})}
@@ -337,7 +281,6 @@ const REDIRECT_URI = typeof window !== 'undefined' ? window.location.origin : 'h
             </Grid>
           </Grid>
         ) : (
-          /* Presets Logic */
           <div className="max-w-3xl mx-auto pt-10 animate-fade-in">
              <div className="flex justify-between items-end mb-12">
                <div>
@@ -372,13 +315,13 @@ const REDIRECT_URI = typeof window !== 'undefined' ? window.location.origin : 'h
                     <div className="flex gap-4">
                       <button 
                         onClick={handleCreateTemplate}
-                        className="flex-1 bg-red-600 hover:bg-red-700 text-white h-12 rounded-xl font-black text-[10px] uppercase tracking-widest active:scale-95 transition-all"
+                        className="flex-1 bg-red-600 hover:bg-red-700 text-white h-12 rounded-xl font-black text-[10px] uppercase tracking-widest"
                       >
                         Save Preset
                       </button>
                       <button 
                         onClick={() => setShowCreateModal(false)}
-                        className="flex-1 bg-white/5 hover:bg-white/10 text-white h-12 rounded-xl font-black text-[10px] uppercase tracking-widest active:scale-95 transition-all"
+                        className="flex-1 bg-white/5 hover:bg-white/10 text-white h-12 rounded-xl font-black text-[10px] uppercase tracking-widest"
                       >
                         Cancel
                       </button>
@@ -389,34 +332,22 @@ const REDIRECT_URI = typeof window !== 'undefined' ? window.location.origin : 'h
 
              <div className="space-y-6">
                 {templates.map(template => (
-                  <div key={template.id} className="bg-[#0f0f0f] border border-white/5 p-10 rounded-[48px] group hover:border-red-600/30 transition-all flex justify-between items-start cursor-default shadow-xl relative overflow-hidden">
+                  <div key={template.id} className="bg-[#0f0f0f] border border-white/5 p-10 rounded-[48px] flex justify-between items-start shadow-xl relative overflow-hidden">
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-6">
                         <div className="w-3 h-3 bg-red-600 rounded-full animate-pulse"></div>
                         <Typography className="font-black text-2xl tracking-tight">{template.name}</Typography>
                       </div>
-
-                      <div className="bg-white/5 border border-white/[0.05] p-6 rounded-3xl font-mono text-xs text-slate-400 whitespace-pre-wrap leading-relaxed italic shadow-inner">
+                      <div className="bg-white/5 border border-white/[0.05] p-6 rounded-3xl font-mono text-xs text-slate-400 whitespace-pre-wrap leading-relaxed italic">
                          "{template.description}"
                       </div>
                     </div>
-
                     <div className="flex flex-col gap-4 ml-10">
                        <button 
-                        onClick={() => {
-                          setNewTemplate({ name: template.name, description: template.description });
-                          setShowCreateModal(true);
-                          handleDeleteTemplate(template.id);
-                        }}
-                        className="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center hover:bg-white/10 transition-all text-slate-500 hover:text-white"
-                       >
-                          <i className="fa-solid fa-pen"></i>
-                       </button>
-                       <button 
                         onClick={() => handleDeleteTemplate(template.id)}
-                        className="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center hover:bg-red-600/20 transition-all text-slate-500 hover:text-red-500"
+                        className="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center hover:bg-red-600/20 text-slate-500 hover:text-red-500 transition-all font-bold"
                        >
-                          <i className="fa-solid fa-trash"></i>
+                          X
                        </button>
                     </div>
                   </div>
@@ -426,7 +357,6 @@ const REDIRECT_URI = typeof window !== 'undefined' ? window.location.origin : 'h
         )}
       </Container>
 
-      {/* Footer Branding */}
       <footer className="mt-40 border-t border-white/5 py-20 bg-black/40 backdrop-blur-md">
          <Container maxWidth="lg">
             <div className="flex flex-col md:flex-row justify-between items-center gap-10">
@@ -445,13 +375,13 @@ const REDIRECT_URI = typeof window !== 'undefined' ? window.location.origin : 'h
                 <div className="flex items-center gap-12">
                    <a href="https://www.instagram.com/prodbymdottyy2/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 group">
                       <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-red-600 transition-all">
-                        <i className="fa-brands fa-instagram text-slate-500 group-hover:text-white"></i>
+                        <i className="fa-brands fa-instagram text-slate-500 group-hover:text-white text-xl"></i>
                       </div>
                       <span className="text-xs font-black tracking-widest text-slate-500 group-hover:text-white uppercase transition-colors">prodbymdottyy2</span>
                    </a>
                    <div className="hidden md:block h-10 w-px bg-white/10"></div>
                    <div className="flex flex-col items-end">
-                      <Typography className="text-[10px] font-black text-slate-600 uppercase tracking-widest">Current Version</Typography>
+                      <Typography className="text-[10px] font-black text-slate-600 uppercase tracking-widest">Version</Typography>
                       <Typography className="text-sm font-bold text-white">V1.0.4-BETA</Typography>
                    </div>
                 </div>
@@ -466,12 +396,9 @@ const REDIRECT_URI = typeof window !== 'undefined' ? window.location.origin : 'h
         anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
       >
         <div className="bg-red-600 text-white px-10 py-5 rounded-[20px] font-black text-[10px] tracking-widest uppercase shadow-2xl flex items-center gap-4">
-           <i className="fa-solid fa-check-double text-lg"></i>
            Preset Successfully Applied
         </div>
       </Snackbar>
     </div>
   );
-};
-
-window.App = App;
+}
